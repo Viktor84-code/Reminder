@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+
 print("DB_PASSWORD from env:", os.getenv('DB_PASSWORD'))
 
 load_dotenv()
@@ -27,8 +28,8 @@ INSTALLED_APPS = [
     'django_celery_beat',
 
     'habits',
-    'users',
     'tg_bot',
+    'accounts',
 ]
 
 MIDDLEWARE = [
