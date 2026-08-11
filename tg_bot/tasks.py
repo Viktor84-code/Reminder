@@ -11,7 +11,9 @@ def send_habit_reminders():
     now = timezone.now()
     current_time = now.time()
 
-    habits = Habit.objects.filter(time__hour=current_time.hour, time__minute=current_time.minute)
+    habits = Habit.objects.filter(
+        time__hour=current_time.hour, time__minute=current_time.minute
+    )
 
     for habit in habits:
         chat_id = habit.user.profile.telegram_chat_id

@@ -7,7 +7,7 @@ from .serializers import HabitSerializer
 
 class HabitPagination(PageNumberPagination):
     page_size = 5
-    page_size_query_param = 'page_size'
+    page_size_query_param = "page_size"
     max_page_size = 20
 
 
@@ -27,6 +27,7 @@ class HabitViewSet(viewsets.ModelViewSet):
 
 class PublicHabitListView(generics.ListAPIView):
     """Список публичных привычек (только чтение)"""
+
     serializer_class = HabitSerializer
     pagination_class = HabitPagination
     permission_classes = [permissions.IsAuthenticated]
