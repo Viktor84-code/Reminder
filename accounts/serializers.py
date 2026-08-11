@@ -6,23 +6,6 @@ from .models import UserProfile
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = User
-        fields = ["id", "username", "password", "email"]
-        read_only_fields = ["id"]
-
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data["username"],
-            password=validated_data["password"],
-            email=validated_data.get("email", ""),
-        )
-        return user
-
-
-class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
     telegram_chat_id = serializers.CharField(
         source="profile.telegram_chat_id", required=False, allow_blank=True
     )

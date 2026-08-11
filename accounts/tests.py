@@ -11,7 +11,7 @@ class AuthTest(TestCase):
         data = {
             "username": "newuser",
             "password": "newpass123",
-            "email": "new@mail.com"
+            "email": "new@mail.com",
         }
         response = self.client.post("/api/auth/register/", data, format="json")
         self.assertEqual(response.status_code, 201)
@@ -19,19 +19,13 @@ class AuthTest(TestCase):
 
     def test_login(self):
         User.objects.create_user(username="testuser", password="testpass")
-        data = {
-            "username": "testuser",
-            "password": "testpass"
-        }
+        data = {"username": "testuser", "password": "testpass"}
         response = self.client.post("/api/auth/token/", data, format="json")
         self.assertEqual(response.status_code, 200)
         self.assertIn("access", response.data)
         self.assertIn("refresh", response.data)
 
     def test_login_invalid(self):
-        data = {
-            "username": "wronguser",
-            "password": "wrongpass"
-        }
+        data = {"username": "wronguser", "password": "wrongpass"}
         response = self.client.post("/api/auth/token/", data, format="json")
         self.assertEqual(response.status_code, 401)
