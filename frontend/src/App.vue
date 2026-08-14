@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <h1>Привычки</h1>
-    <p>Здесь будет интерфейс</p>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
