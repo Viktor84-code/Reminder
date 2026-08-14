@@ -2,6 +2,7 @@
   <div>
   <h2>Мои привычки</h2>
   <button @click="logout">Выйти</button>
+  <router-link to="/habits/public">Публичные привычки</router-link>
   <ul>
     <li v-for="habit in habits" :key="habit.id">
       {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
