@@ -1,15 +1,20 @@
 <template>
   <div>
-    <h2>Мои привычки</h2>
-    <button @click="logout">Выйти</button>
-    <ul>
-      <li v-for="habit in habits" :key="habit.id">
-        {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
+  <h2>Мои привычки</h2>
+  <button @click="logout">Выйти</button>
+  <ul>
+    <li v-for="habit in habits" :key="habit.id">
+      {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
+      <div>
+        <router-link :to="`/habits/edit/${habit.id}`">
+          <button class="edit-btn">Редактировать</button>
+        </router-link>
         <button @click="deleteHabit(habit.id)">Удалить</button>
-      </li>
-    </ul>
-    <router-link to="/habits/create">Создать привычку</router-link>
-  </div>
+      </div>
+    </li>
+  </ul>
+  <router-link to="/habits/create">Создать привычку</router-link>
+</div>
 </template>
 
 <script>

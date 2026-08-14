@@ -145,3 +145,23 @@ input[type="checkbox"] {
   justify-content: center;
   margin-top: 16px;
 }
+
+li .edit-btn {
+  background: #2e7d32;
+  margin-right: 8px;
+}
+
+li .edit-btn:hover {
+  background: #1b5e20;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+  transform: none;
+}
+
+li div {
+  display: flex;
+  gap: 6px;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
