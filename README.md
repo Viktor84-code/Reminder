@@ -1,70 +1,91 @@
 # Habit Tracker
 
-Трекер полезных привычек. Курсовая работа Skypro.
+Трекер полезных привычек. Полноценное SPA-приложение с бэкендом на Django + DRF и фронтендом на Vue 3.
 
 ## 📋 Описание
 
-Бэкенд-часть SPA-приложения для отслеживания привычек. Реализована на Django + DRF с интеграцией Telegram-бота и Celery для напоминаний.
+Приложение для отслеживания привычек с интеграцией Telegram-бота, Celery для фоновых задач и современным интерфейсом.
 
 ## 🚀 Технологии
 
+### Бэкенд
 - Python 3.13
 - Django 6.0
 - Django REST Framework
 - JWT авторизация
 - PostgreSQL
 - Redis
-- Celery
+- Celery + Beat
 - Telegram Bot API
 - Swagger (drf-spectacular)
 - Docker
 
-## 📦 Установка
+### Фронтенд
+- Vue 3
+- Vite
+- Vue Router
+- Axios
+- CSS
+
+## 📦 Установка и запуск
+
+### Бэкенд
 
 1. Клонировать репозиторий:
 ```bash
 git clone git@github.com:Viktor84-code/habit-tracker.git
 cd habit-tracker
-Создать виртуальное окружение:
+Создать виртуальное окружение и установить зависимости:
 
 bash
 python -m venv venv
-source venv/bin/activate  # или venv\Scripts\activate для Windows
-Установить зависимости:
-
-bash
+source venv/bin/activate  # или venv\Scripts\activate
 pip install -r requirements.txt
-Создать файл .env (по примеру .env.template)
+Создать файл .env по примеру .env.example
 
-Запустить Docker-контейнеры:
+Запустить Docker-контейнеры (если остановлены):
 
 bash
-docker run -d --name habits-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=habits -p 5433:5432 postgres:15
-docker run -d --name habit-redis -p 6379:6379 redis:7
+docker start habits-postgres
+docker start habit-redis
 Применить миграции:
 
 bash
 python manage.py migrate
-Запустить сервер:
+Запустить бэкенд:
 
 bash
 python manage.py runserver
-🔧 Запуск Celery
-В отдельных терминалах:
+(Опционально) Запустить Celery:
 
 bash
 celery -A config worker --loglevel=info -P eventlet
 celery -A config beat --loglevel=info
+```
+Фронтенд
+Перейти в папку frontend:
+```
+bash
+cd frontend
+Установить зависимости:
+
+bash
+npm install
+Запустить dev-сервер:
+
+bash
+npm run dev
 📚 Документация API
 Swagger доступен по адресу:
-```
+
 text
 http://127.0.0.1:8000/api/docs/
 🧪 Тесты
-```bash
+bash
 python manage.py test
 Покрытие: 93%
 ```
+
 🤖 Telegram
 Для работы бота добавьте в .env:
 
@@ -72,5 +93,19 @@ text
 TG_BOT_TOKEN=your_token
 Бот отправляет напоминания о привычках в указанное время.
 
+📱 Интерфейс
+Регистрация / Логин
+
+Список привычек (с пагинацией)
+
+Создание привычки
+
+Редактирование привычки
+
+Удаление привычки
+
+Публичные привычки
+
 👤 Автор
-Viktor Britkin
+Виктор Бриткин
+GitHub: Viktor84-code
