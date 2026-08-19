@@ -109,3 +109,28 @@ TG_BOT_TOKEN=your_token
 👤 Автор
 Виктор Бриткин
 GitHub: Viktor84-code
+
+## 🐳 Запуск через Docker
+
+### 1. Настроить переменные окружения
+
+```bash
+cp .env.example .env
+```
+Отредактируй .env под свои данные.
+
+2. Запустить все сервисы
+```bash
+docker-compose up -d --build
+```
+3. Проверить, что всё работает
+Бэкенд: http://localhost:8000
+
+Swagger: http://localhost:8000/api/docs/
+
+Фронтенд: http://localhost:3000
+
+4. Остановка
+```bash
+docker-compose down
+```
