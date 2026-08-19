@@ -23,7 +23,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await api.post('auth/token/', {
+        const response = await api.post('/auth/token/', {
           username: this.username,
           password: this.password,
         })
