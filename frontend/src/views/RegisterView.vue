@@ -27,16 +27,21 @@ export default {
   methods: {
     async register() {
       try {
-        await api.post('auth/register/', {
-          username: this.username,
-          password: this.password,
-          email: this.email,
-          telegram_chat_id: this.telegram_chat_id,
-        })
+        const payload = {
+          username: this.username.trim(),
+          password: this.password.trim(),
+          email: this.email.trim(),
+          telegram_chat_id: this.telegram_chat_id.trim(),
+        }
+        const response = await api.post('/auth/register/', payload)
         alert('Регистрация успешна! Войдите в систему.')
         this.$router.push('/login')
       } catch (error) {
-        alert('Ошибка регистрации')
+        if (error.response) {
+          alert('Ошибка: ' + JSON.stringify(error.response.data))
+        } else {
+          alert('Ошибка соединения')
+        }
       }
     },
   },
