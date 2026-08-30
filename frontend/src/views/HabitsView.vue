@@ -2,7 +2,7 @@
   <div>
     <h2>Мои привычки</h2>
     <button @click="logout">Выйти</button>
-    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full shadow-sm text-sm mb-4 hover:bg-green-200 transition">
+    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full border-2 border-green-300 shadow-sm text-sm mb-4 hover:bg-green-200 transition">
       📢 Публичные привычки
     </router-link>
     <ul>
@@ -16,7 +16,7 @@
         </div>
       </li>
     </ul>
-    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl hover:bg-emerald-700 shadow-md transition">
+    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl border-2 border-emerald-700 shadow-md hover:bg-emerald-700 transition">
       + Создать привычку
     </router-link>
   </div>
