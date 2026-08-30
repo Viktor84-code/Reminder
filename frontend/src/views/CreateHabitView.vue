@@ -4,7 +4,7 @@
     <button @click="logout">Выйти</button>
 
     <!-- Публичные привычки -->
-    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full border-2 border-green-500 shadow-md text-sm mb-4 hover:bg-green-200 transition">
+    <router-link to="/habits/public" class="public-btn">
       📢 Публичные привычки
     </router-link>
 
@@ -21,7 +21,7 @@
     </ul>
 
     <!-- Создать привычку -->
-    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl border-4 border-emerald-800 shadow-lg hover:bg-emerald-700 transition">
+    <router-link to="/habits/create" class="create-btn">
       + Создать привычку
     </router-link>
   </div>
@@ -63,3 +63,39 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.public-btn {
+  display: inline-block;
+  background-color: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 2px solid #34d399;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: 0.2s;
+}
+
+.public-btn:hover {
+  background-color: #a7f3d0;
+}
+
+.create-btn {
+  display: inline-block;
+  background-color: #059669;
+  color: white;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 4px solid #065f46;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+}
+
+.create-btn:hover {
+  background-color: #047857;
+}
+</style>
