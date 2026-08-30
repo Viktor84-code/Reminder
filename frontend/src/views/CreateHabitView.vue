@@ -1,19 +1,29 @@
 <template>
   <div>
-    <h2>Создать привычку</h2>
-    <form @submit.prevent="createHabit">
-      <input v-model="habit.place" placeholder="Место" required />
-      <input v-model="habit.time" type="time" required />
-      <input v-model="habit.action" placeholder="Действие" required />
-      <label>
-        <input v-model="habit.is_pleasant" type="checkbox" />
-        Приятная привычка
-      </label>
-      <input v-model="habit.periodicity" type="number" placeholder="Периодичность (дней)" min="1" max="7" />
-      <input v-model="habit.duration" type="number" placeholder="Длительность (сек)" required />
-      <button type="submit">Сохранить</button>
-    </form>
-    <router-link to="/habits">Назад</router-link>
+    <h2>Мои привычки</h2>
+    <button @click="logout">Выйти</button>
+
+    <!-- Публичные привычки -->
+    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full border-2 border-green-500 shadow-md text-sm mb-4 hover:bg-green-200 transition">
+      📢 Публичные привычки
+    </router-link>
+
+    <ul>
+      <li v-for="habit in habits" :key="habit.id">
+        {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
+        <div>
+          <router-link :to="`/habits/edit/${habit.id}`">
+            <button class="edit-btn">Редактировать</button>
+          </router-link>
+          <button @click="deleteHabit(habit.id)">Удалить</button>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Создать привычку -->
+    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl border-4 border-emerald-800 shadow-lg hover:bg-emerald-700 transition">
+      + Создать привычку
+    </router-link>
   </div>
 </template>
 
@@ -23,25 +33,32 @@ import api from '@/api'
 export default {
   data() {
     return {
-      habit: {
-        place: '',
-        time: '',
-        action: '',
-        is_pleasant: false,
-        periodicity: 1,
-        duration: 60,
-        is_public: false,
-      },
+      habits: [],
     }
   },
+  async mounted() {
+    await this.loadHabits()
+  },
   methods: {
-    async createHabit() {
+    async loadHabits() {
       try {
-        await api.post('/habits/', this.habit)
-        this.$router.push('/habits')
+        const response = await api.get('habits/')
+        this.habits = response.data.results
       } catch (error) {
-        alert('Ошибка создания привычки')
+        if (error.response?.status === 401) {
+          this.$router.push('/login')
+        }
       }
+    },
+    async deleteHabit(id) {
+      if (confirm('Удалить привычку?')) {
+        await api.delete(`habits/${id}/`)
+        await this.loadHabits()
+      }
+    },
+    logout() {
+      localStorage.removeItem('access_token')
+      this.$router.push('/login')
     },
   },
 }
