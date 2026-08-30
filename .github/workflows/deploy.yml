@@ -63,4 +63,4 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > key.pem
           chmod 600 key.pem
-          ssh -i key.pem $USER@$HOST "cd ~/reminder-project && git pull && sudo docker-compose up -d --build"
+          ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST "cd ~/reminder-project && git pull && sudo docker-compose up -d --build"
