@@ -5,6 +5,7 @@
       <input v-model="habit.action" placeholder="Действие" required />
       <input v-model="habit.time" type="time" required />
       <input v-model="habit.place" placeholder="Место" required />
+      <input v-model="habit.duration" type="number" placeholder="Длительность (мин)" required />
       <button type="submit">Создать</button>
     </form>
     <router-link to="/habits">Назад</router-link>
@@ -21,6 +22,7 @@ export default {
         action: '',
         time: '',
         place: '',
+        duration: '',
       },
     }
   },
