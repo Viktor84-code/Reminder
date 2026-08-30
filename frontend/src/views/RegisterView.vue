@@ -5,6 +5,7 @@
       <input v-model="username" placeholder="Логин" required />
       <input v-model="password" type="password" placeholder="Пароль" required />
       <input v-model="email" type="email" placeholder="Email" required />
+      <input v-model="telegram_chat_id" placeholder="Telegram Chat ID" required />
       <button type="submit">Зарегистрироваться</button>
     </form>
     <p>Уже есть аккаунт? <router-link to="/login">Войти</router-link></p>
@@ -20,17 +21,19 @@ export default {
       username: '',
       password: '',
       email: '',
+      telegram_chat_id: '',
     }
   },
   methods: {
     async register() {
       try {
-        await api.post('auth/register/', {
+        await api.post('/auth/register/', {
           username: this.username,
           password: this.password,
           email: this.email,
+          telegram_chat_id: this.telegram_chat_id,
         })
-        alert('Регистрация успешна! Теперь войдите.')
+        alert('Регистрация успешна! Войдите в систему.')
         this.$router.push('/login')
       } catch (error) {
         alert('Ошибка регистрации')
