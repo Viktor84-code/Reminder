@@ -37,7 +37,7 @@ export default {
   methods: {
     async createHabit() {
       try {
-        await api.post('habits/', this.habit)
+        await api.post('/habits/', this.habit)
         this.$router.push('/habits')
       } catch (error) {
         alert('Ошибка создания привычки')
