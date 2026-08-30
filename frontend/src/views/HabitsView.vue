@@ -2,23 +2,26 @@
   <div>
     <h2>Мои привычки</h2>
     <button @click="logout">Выйти</button>
-    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full border-2 border-green-300 shadow-sm text-sm mb-4 hover:bg-green-200 transition">
+
+    <div style="background-color: #d1fae5; color: #065f46; font-weight: 600; padding: 8px 16px; border-radius: 9999px; display: inline-block; font-size: 14px; margin-bottom: 16px; margin-top: 8px; cursor: pointer;" @click="$router.push('/habits/public')">
       📢 Публичные привычки
-    </router-link>
+    </div>
+
     <ul>
       <li v-for="habit in habits" :key="habit.id">
         {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
         <div>
           <router-link :to="`/habits/edit/${habit.id}`">
-            <button class="edit-btn">Редактировать</button>
+            <button>Редактировать</button>
           </router-link>
           <button @click="deleteHabit(habit.id)">Удалить</button>
         </div>
       </li>
     </ul>
-    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl border-2 border-emerald-700 shadow-md hover:bg-emerald-700 transition">
+
+    <button style="width: 100%; border: 2px solid #059669; color: #059669; background-color: transparent; font-weight: 500; padding: 12px 24px; border-radius: 12px; cursor: pointer; font-size: 16px; text-align: center; display: block; box-sizing: border-box;" @click="$router.push('/habits/create')">
       + Создать привычку
-    </router-link>
+    </button>
   </div>
 </template>
 
@@ -38,7 +41,7 @@ export default {
     async loadHabits() {
       try {
         const response = await api.get('habits/')
-        this.habits = response.data.results
+        this.habits = response.data.results || []
       } catch (error) {
         if (error.response?.status === 401) {
           this.$router.push('/login')
