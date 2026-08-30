@@ -27,7 +27,7 @@ export default {
   methods: {
     async register() {
       try {
-        await api.post('/auth/register/', {
+        await api.post('auth/register/', {
           username: this.username,
           password: this.password,
           email: this.email,
