@@ -29,7 +29,7 @@ export default {
         })
         localStorage.setItem('access_token', response.data.access)
         localStorage.setItem('refresh_token', response.data.refresh)
-        this..push('/habits')
+        this.$router.push('/habits')
       } catch (error) {
         alert('Неверный логин или пароль')
       }
