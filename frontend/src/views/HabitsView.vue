@@ -1,21 +1,25 @@
 <template>
   <div>
-  <h2>Мои привычки</h2>
-  <button @click="logout">Выйти</button>
-  <router-link to="/habits/public">Публичные привычки</router-link>
-  <ul>
-    <li v-for="habit in habits" :key="habit.id">
-      {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
-      <div>
-        <router-link :to="`/habits/edit/${habit.id}`">
-          <button class="edit-btn">Редактировать</button>
-        </router-link>
-        <button @click="deleteHabit(habit.id)">Удалить</button>
-      </div>
-    </li>
-  </ul>
-  <router-link to="/habits/create">Создать привычку</router-link>
-</div>
+    <h2>Мои привычки</h2>
+    <button @click="logout">Выйти</button>
+    <router-link to="/habits/public" class="inline-block bg-green-100 text-green-800 font-semibold px-4 py-2 rounded-full shadow-sm text-sm mb-4 hover:bg-green-200 transition">
+      📢 Публичные привычки
+    </router-link>
+    <ul>
+      <li v-for="habit in habits" :key="habit.id">
+        {{ habit.action }} в {{ habit.time }} ({{ habit.place }})
+        <div>
+          <router-link :to="`/habits/edit/${habit.id}`">
+            <button class="edit-btn">Редактировать</button>
+          </router-link>
+          <button @click="deleteHabit(habit.id)">Удалить</button>
+        </div>
+      </li>
+    </ul>
+    <router-link to="/habits/create" class="inline-block bg-emerald-600 text-white font-medium py-3 px-6 rounded-xl hover:bg-emerald-700 shadow-md transition">
+      + Создать привычку
+    </router-link>
+  </div>
 </template>
 
 <script>
