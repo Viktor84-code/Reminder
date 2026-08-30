@@ -67,7 +67,9 @@ python manage.py runserver
 
 ```bash
 cd frontend
+Установить зависимости:
 npm install
+Запустить фронтенд:
 npm run dev
 ```
 🐳 Запуск через Docker
@@ -85,13 +87,13 @@ cp .env.template .env
 docker-compose up -d --build
 ```
 4. Доступ
-Фронтенд: http://localhost:3000
+Фронтенд: http://localhost:3001
 
-API: http://localhost:8000/api/
+API: http://localhost:8001/api/
 
-Swagger: http://localhost:8000/api/docs/
+Swagger: http://localhost:8001/api/docs/
 
-Админка: http://localhost:8000/admin
+Админка: http://localhost:8001/admin
 
 5. Остановка
 ```bash
