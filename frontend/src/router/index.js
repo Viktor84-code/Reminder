@@ -1,0 +1,33 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import LoginView from '@/views/LoginView.vue'
+import RegisterView from '@/views/RegisterView.vue'
+import HabitsView from '@/views/HabitsView.vue'
+import CreateHabitView from '@/views/CreateHabitView.vue'
+import EditHabitView from '@/views/EditHabitView.vue'
+import PublicHabitsView from '@/views/PublicHabitsView.vue'
+
+const routes = [
+  { path: '/', redirect: '/habits' },
+  { path: '/login', component: LoginView },
+  { path: '/register', component: RegisterView },
+  { path: '/habits', component: HabitsView, meta: { requiresAuth: true } },
+  { path: '/habits/create', component: CreateHabitView, meta: { requiresAuth: true } },
+  { path: '/habits/edit/:id', component: EditHabitView, meta: { requiresAuth: true } },
+  { path: '/habits/public', component: PublicHabitsView, meta: { requiresAuth: true } },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem('access_token')
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/login')
+  } else {
+    next()
+  }
+})
+
+export default router

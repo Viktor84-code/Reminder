@@ -19,3 +19,20 @@ htmlcov/
 *.pyproj
 *.sln
 *.swp
+# Docker
+*.pid
+celerybeat-schedule
+celerybeat-schedule-shm
+celerybeat-schedule-wal
+
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+
+# Фронтенд
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

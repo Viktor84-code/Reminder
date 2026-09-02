@@ -17,7 +17,7 @@ class HabitModelTest(TestCase):
             is_pleasant=False,
             periodicity=1,
             duration=60,
-            is_public=False
+            is_public=False,
         )
         self.assertEqual(habit.action, "Зарядка")
         self.assertEqual(habit.user, user)
@@ -38,7 +38,7 @@ class HabitAPITest(TestCase):
             "is_pleasant": False,
             "periodicity": 1,
             "duration": 60,
-            "is_public": False
+            "is_public": False,
         }
         response = self.client.post("/api/habits/", data, format="json")
         self.assertEqual(response.status_code, 201)
@@ -46,11 +46,7 @@ class HabitAPITest(TestCase):
 
     def test_list_habits(self):
         Habit.objects.create(
-            user=self.user,
-            place="Дом",
-            time="08:00:00",
-            action="Зарядка",
-            duration=60
+            user=self.user, place="Дом", time="08:00:00", action="Зарядка", duration=60
         )
         response = self.client.get("/api/habits/")
         self.assertEqual(response.status_code, 200)
@@ -63,7 +59,7 @@ class HabitAPITest(TestCase):
             time="08:00:00",
             action="Публичная",
             duration=60,
-            is_public=True
+            is_public=True,
         )
         response = self.client.get("/api/habits/public/")
         self.assertEqual(response.status_code, 200)
@@ -71,27 +67,17 @@ class HabitAPITest(TestCase):
 
     def test_update_habit(self):
         habit = Habit.objects.create(
-            user=self.user,
-            place="Дом",
-            time="08:00:00",
-            action="Зарядка",
-            duration=60
+            user=self.user, place="Дом", time="08:00:00", action="Зарядка", duration=60
         )
         response = self.client.patch(
-            f"/api/habits/{habit.id}/",
-            {"action": "Новая зарядка"},
-            format="json"
+            f"/api/habits/{habit.id}/", {"action": "Новая зарядка"}, format="json"
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["action"], "Новая зарядка")
 
     def test_delete_habit(self):
         habit = Habit.objects.create(
-            user=self.user,
-            place="Дом",
-            time="08:00:00",
-            action="Зарядка",
-            duration=60
+            user=self.user, place="Дом", time="08:00:00", action="Зарядка", duration=60
         )
         response = self.client.delete(f"/api/habits/{habit.id}/")
         self.assertEqual(response.status_code, 204)
