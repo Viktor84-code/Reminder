@@ -1,76 +1,166 @@
-# Habit Tracker
+# Habit Tracker (Reminder)
 
-Трекер полезных привычек. Курсовая работа Skypro.
+Трекер полезных привычек. Полноценное SPA-приложение с бэкендом на Django + DRF и фронтендом на Vue 3.
 
-## 📋 Описание
+---
 
-Бэкенд-часть SPA-приложения для отслеживания привычек. Реализована на Django + DRF с интеграцией Telegram-бота и Celery для напоминаний.
+## 🌐 Демо
 
-## 🚀 Технологии
+Проект доступен по адресу:  
+**[http://93.77.161.31:3001](http://93.77.161.31:3001)**
 
+---
+
+## 🧰 Технологии
+
+### Бэкенд
 - Python 3.13
 - Django 6.0
 - Django REST Framework
 - JWT авторизация
 - PostgreSQL
 - Redis
-- Celery
+- Celery + Beat
 - Telegram Bot API
 - Swagger (drf-spectacular)
 - Docker
 
-## 📦 Установка
+### Фронтенд
+- Vue 3
+- Vite
+- Vue Router
+- Axios
+- CSS
+
+---
+
+## 📦 Установка и запуск
+
+### Бэкенд
 
 1. Клонировать репозиторий:
 ```bash
-git clone git@github.com:Viktor84-code/habit-tracker.git
-cd habit-tracker
-Создать виртуальное окружение:
+git clone https://github.com/Viktor84-code/Reminder.git
+cd Reminder
+```
+Создать виртуальное окружение и установить зависимости:
 
-bash
+```bash
 python -m venv venv
-source venv/bin/activate  # или venv\Scripts\activate для Windows
-Установить зависимости:
-
-bash
+venv\Scripts\activate  # или source venv/bin/activate
 pip install -r requirements.txt
-Создать файл .env (по примеру .env.template)
+```
+Создать файл .env по примеру .env.template
 
-Запустить Docker-контейнеры:
-
-bash
-docker run -d --name habits-postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=habits -p 5433:5432 postgres:15
-docker run -d --name habit-redis -p 6379:6379 redis:7
 Применить миграции:
 
-bash
+```bash
 python manage.py migrate
-Запустить сервер:
+```
+Запустить бэкенд:
 
-bash
+```bash
 python manage.py runserver
-🔧 Запуск Celery
-В отдельных терминалах:
+```
+Фронтенд
+Перейти в папку frontend:
 
-bash
-celery -A config worker --loglevel=info -P eventlet
-celery -A config beat --loglevel=info
+```bash
+cd frontend
+Установить зависимости:
+npm install
+Запустить фронтенд:
+npm run dev
+```
+🐳 Запуск через Docker
+1. Подготовка
+Убедитесь, что Docker и Docker Compose установлены.
+
+2. Настройка переменных окружения
+Скопируйте .env.template в .env и заполните значения:
+
+```bash
+cp .env.template .env
+```
+3. Сборка и запуск
+```bash
+docker-compose up -d --build
+```
+4. Доступ
+Фронтенд: http://localhost:3001
+
+API: http://localhost:8001/api/
+
+Swagger: http://localhost:8001/api/docs/
+
+Админка: http://localhost:8001/admin
+
+5. Остановка
+```bash
+docker-compose down
+```
 📚 Документация API
 Swagger доступен по адресу:
-```
-text
-http://127.0.0.1:8000/api/docs/
+http://localhost:8000/api/docs/
+
 🧪 Тесты
 ```bash
 python manage.py test
-Покрытие: 93%
 ```
+Покрытие: 93%
+
 🤖 Telegram
 Для работы бота добавьте в .env:
 
-text
+env
 TG_BOT_TOKEN=your_token
 Бот отправляет напоминания о привычках в указанное время.
 
+🔧 CI/CD
+При каждом пуше в ветку feature/docker-compose запускается GitHub Actions:
+
+Линтинг (flake8)
+
+Тесты (python manage.py test)
+
+Сборка Docker-образов
+
+Автоматический деплой на сервер
+
+📱 Интерфейс
+Регистрация / Логин
+
+Список привычек (с пагинацией)
+
+Создание привычки
+
+Редактирование привычки
+
+Удаление привычки
+
+Публичные привычки
+
+
+Обновление (CI/CD и деплой):
+Добавлен GitHub Actions workflow для:
+
+Запуска тестов
+Сборки Docker-образов
+Автоматического деплоя на сервер
+Настроен SSH-доступ для деплоя через GitHub Actions
+
+Добавлен README.md с инструкциями:
+
+Локальный запуск
+Настройка CI/CD
+Деплой на сервер
+Проверка:
+Все 3 шага GitHub Actions (test, build, deploy) проходят
+Все контейнеры работают на сервере
+Фронтенд: http://93.77.161.31:3001
+API: http://93.77.161.31:8001/api
+Swagger: http://93.77.161.31:8001/api/docs
+
 👤 Автор
-Viktor Britkin
+Виктор Бриткин
+GitHub: Viktor84-code
